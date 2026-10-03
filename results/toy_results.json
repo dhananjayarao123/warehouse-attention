@@ -1,0 +1,60 @@
+{
+    "model_configuration": {
+        "task": "synthetic_sequence_prediction",
+        "sequence_length": 12,
+        "d_model": 16,
+        "hidden_units": 16,
+        "train_samples": 4000,
+        "validation_samples": 1000,
+        "test_samples": 1000,
+        "batch_size": 64,
+        "epochs": 10,
+        "learning_rate": 0.001,
+        "noise_std": 0.05,
+        "optimizer": "Adam",
+        "loss": "MeanSquaredError",
+        "positional_encoding": "trainable_absolute_embedding",
+        "attention_type": "scaled_dot_product_self_attention"
+    },
+    "test_metrics": {
+        "MSE": 0.0037840313743799925,
+        "MAE": 0.0476827397942543,
+        "RMSE": 0.0615144819021225
+    },
+    "best_validation_loss": 0.0035845504462486133,
+    "zero_prediction_baseline_mse": 0.3845953941345215,
+    "test_mse_reduction_vs_baseline": 0.9901610016822815,
+    "mean_attention_entropy": 1.423757791519165,
+    "observations": {
+        "initial_train_loss": 0.31735079108722625,
+        "final_train_loss": 0.004281372105377534,
+        "initial_validation_loss": 0.285830482840538,
+        "final_validation_loss": 0.0035845504462486133,
+        "best_validation_loss": 0.0035845504462486133,
+        "best_validation_epoch": 10,
+        "validation_loss_decreased": true,
+        "zero_prediction_baseline_mse": 0.3845953941345215,
+        "test_mse_reduction_vs_baseline": 0.9901610016822815,
+        "final_attention_gradient_norm": 0.04675473469412989,
+        "attention_received_nonzero_gradients": true,
+        "mean_attention_by_position": {
+            "0": 0.010456321761012077,
+            "1": 0.011326019652187824,
+            "2": 0.010382742621004581,
+            "3": 0.012028506956994534,
+            "4": 0.01195232942700386,
+            "5": 0.011849510483443737,
+            "6": 0.1798805147409439,
+            "7": 0.011506126262247562,
+            "8": 0.011858707293868065,
+            "9": 0.2727125883102417,
+            "10": 0.010890087112784386,
+            "11": 0.4451560974121094
+        },
+        "important_positions_zero_based": [
+            11,
+            9,
+            6
+        ]
+    }
+}

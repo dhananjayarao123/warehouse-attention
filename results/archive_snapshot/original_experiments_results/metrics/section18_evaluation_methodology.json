@@ -1,0 +1,66 @@
+{
+    "section": 18,
+    "objective": "Evaluate the warehouse next-hour demand forecast using a leakage-safe time-dependent evaluation methodology.",
+    "split_strategy": {
+        "type": "chronological",
+        "train_ratio": 0.7,
+        "validation_ratio": 0.15,
+        "test_ratio": 0.15,
+        "random_split": false,
+        "explanation": "The earliest observations are used for training, the following observations are used for validation, and the latest observations are reserved for the final test. This prevents future demand observations from leaking into model training."
+    },
+    "forecasting_input": "Previous 24 hourly observations",
+    "forecasting_target": "Next-hour demand",
+    "metrics_defined_before_experiment": [
+        "MAE",
+        "MSE",
+        "RMSE",
+        "MAPE"
+    ],
+    "primary_metrics": [
+        "MAE",
+        "MSE",
+        "RMSE"
+    ],
+    "additional_metric": "MAPE",
+    "metric_definitions": {
+        "MAE": {
+            "formula": "MAE = (1/N) * sum(|y - y_hat|)",
+            "reason": "MAE is easy to interpret because it expresses the average absolute forecasting error in the same units as warehouse demand.",
+            "lower_is_better": true
+        },
+        "MSE": {
+            "formula": "MSE = (1/N) * sum((y - y_hat)^2)",
+            "reason": "MSE penalizes larger forecasting errors more strongly, making it useful when large demand prediction errors are particularly important.",
+            "lower_is_better": true
+        },
+        "RMSE": {
+            "formula": "RMSE = sqrt(MSE)",
+            "reason": "RMSE retains the original demand units while still giving greater influence to large errors.",
+            "lower_is_better": true
+        },
+        "MAPE": {
+            "formula": "MAPE = mean(|(y-y_hat)/y|) * 100",
+            "reason": "MAPE provides a percentage-based view of forecasting error. It is treated as an additional metric rather than the primary metric because percentage error can become unstable when actual demand is close to zero.",
+            "lower_is_better": true
+        }
+    },
+    "leakage_checks": {
+        "random_shuffle": false,
+        "chronological_order_preserved": true,
+        "future_data_used_for_training": false,
+        "validation_after_training_period": true,
+        "test_after_validation_period": true,
+        "same_test_set_for_final_model_comparison": true
+    },
+    "split_sizes": {
+        "training": 6132,
+        "validation": 1314,
+        "test": 1314
+    },
+    "sequence_sizes": {
+        "training_sequences": 6108,
+        "validation_sequences": 1290,
+        "test_sequences": 1290
+    }
+}

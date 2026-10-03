@@ -1,0 +1,40 @@
+{
+    "section": 16,
+    "objective": "Predict next-hour warehouse demand from the previous 24 hourly observations.",
+    "pipeline": [
+        "t-23 ... t-2 t-1",
+        "Input representation",
+        "Self-attention",
+        "Aggregated context",
+        "Prediction",
+        "Next-hour demand"
+    ],
+    "what_model_learns": "The model learns parameterized relationships between historical hourly demand representations through Q, K and V projections. Attention determines how strongly each historical representation contributes to each query representation.",
+    "test_mse": 0.6632354855537415,
+    "test_mae": 0.6713221073150635,
+    "test_rmse": 0.8143926858901978,
+    "mean_attention_entropy": 3.1693766117095947,
+    "highest_attention_positions": [
+        {
+            "position": "t-23",
+            "mean_attention": 0.04172636941075325
+        },
+        {
+            "position": "t-22",
+            "mean_attention": 0.041719526052474976
+        },
+        {
+            "position": "t-21",
+            "mean_attention": 0.04171355068683624
+        },
+        {
+            "position": "t-0",
+            "mean_attention": 0.04171334579586983
+        },
+        {
+            "position": "t-20",
+            "mean_attention": 0.041706521064043045
+        }
+    ],
+    "interpretation_warning": "Attention weights describe model weighting behavior and should not automatically be interpreted as causal explanations."
+}

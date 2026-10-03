@@ -1,0 +1,45 @@
+{
+    "section": 17,
+    "objective": "Compare the warehouse attention model with simple prediction baselines on the same test set.",
+    "baselines": {
+        "last_observation": "\u0177(t+1) = y(t)",
+        "moving_average": "\u0177(t+1) = (1/24) * sum(y(t-i))"
+    },
+    "same_test_set": true,
+    "metrics": [
+        "MAE",
+        "MSE",
+        "RMSE"
+    ],
+    "attention_model": {
+        "MAE": 0.6706367135047913,
+        "MSE": 0.6624753475189209,
+        "RMSE": 0.8139258623123169
+    },
+    "last_observation": {
+        "MAE": 0.4321460425853729,
+        "MSE": 0.39810046553611755,
+        "RMSE": 0.6309520602226257
+    },
+    "moving_average": {
+        "MAE": 0.6722438931465149,
+        "MSE": 0.666532576084137,
+        "RMSE": 0.816414475440979
+    },
+    "differences": [
+        {
+            "Comparison": "Attention - Last Observation",
+            "MAE Difference": 0.23849067091941833,
+            "MSE Difference": 0.26437488198280334,
+            "RMSE Difference": 0.18297380208969116
+        },
+        {
+            "Comparison": "Attention - Moving Average",
+            "MAE Difference": -0.0016071796417236328,
+            "MSE Difference": -0.0040572285652160645,
+            "RMSE Difference": -0.0024886131286621094
+        }
+    ],
+    "interpretation": "The attention model outperforms one baseline but not the other. The relative differences should be interpreted using all reported metrics.",
+    "important_note": "A sophisticated attention model performing worse than a simple baseline is not automatically considered a failure. The observed result should be explained in terms of the data-generating process, predictability, noise, and model behavior."
+}

@@ -1,0 +1,1 @@
+Problem 1 provides the mathematical attention mechanism. Problem 2 applies the same equations to the 24-hour warehouse sequence. The integration demonstration uses the canonical warehouse generator and the authoritative NumPy attention implementation.

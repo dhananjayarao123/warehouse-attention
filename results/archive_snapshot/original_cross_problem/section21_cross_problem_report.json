@@ -1,0 +1,127 @@
+{
+  "section": "21_cross_problem_integration",
+  "seed": 42,
+  "problem1_attention_demo": {
+    "X_shape": [
+      1,
+      24,
+      1
+    ],
+    "Q_shape": [
+      1,
+      24,
+      8
+    ],
+    "K_shape": [
+      1,
+      24,
+      8
+    ],
+    "V_shape": [
+      1,
+      24,
+      8
+    ],
+    "scores_shape": [
+      1,
+      24,
+      24
+    ],
+    "attention_shape": [
+      1,
+      24,
+      24
+    ],
+    "output_shape": [
+      1,
+      24,
+      8
+    ],
+    "attention_row_sums": [
+      [
+        1.0,
+        1.0,
+        1.0,
+        0.9999999999999999,
+        1.0000000000000002,
+        1.0,
+        1.0,
+        0.9999999999999999,
+        1.0,
+        1.0,
+        0.9999999999999999,
+        1.0,
+        1.0,
+        0.9999999999999999,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.9999999999999999,
+        1.0000000000000002,
+        1.0
+      ]
+    ]
+  },
+  "problem2_model": {
+    "lookback_hours": 24,
+    "d_model": 32,
+    "hidden_dim": 32
+  },
+  "chronological_split": {
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15,
+    "test_fraction": 0.15,
+    "random_split": false
+  },
+  "problem2_metrics": {
+    "MAE": 20.823511123657227,
+    "MSE": 831.63232421875,
+    "RMSE": 28.838036067297473
+  },
+  "conceptual_mapping": {
+    "problem_1": {
+      "input": "Sequence X",
+      "query": "Q = X W_Q",
+      "key": "K = X W_K",
+      "value": "V = X W_V",
+      "scores": "S = Q K^T / sqrt(d_k)",
+      "weights": "A = softmax(S)",
+      "output": "Y = A V"
+    },
+    "problem_2": {
+      "input": "Previous 24 hourly warehouse demand observations",
+      "input_representation": "Dense representation of each hourly observation",
+      "attention": "Same Q/K/V scaled dot-product attention mechanism",
+      "context": "Weighted aggregation of historical representations",
+      "prediction_head": "Context -> hidden representation -> next-hour demand",
+      "target": "Next-hour warehouse demand"
+    },
+    "connection": {
+      "sequence_relationship": "Problem 1 learns weighted relationships between sequence positions.",
+      "warehouse_relationship": "Problem 2 contains temporal dependencies between historical demand positions.",
+      "application": "The attention mechanism assigns different weights to historical demand representations before constructing the prediction context.",
+      "not_off_the_shelf_attention": "The warehouse task uses the project's own Problem-1-derived attention mechanism rather than a Transformer or high-level attention layer."
+    }
+  },
+  "attention_analysis": {
+    "available": false,
+    "shape": [
+      408,
+      24,
+      1,
+      1
+    ]
+  },
+  "interpretation": {
+    "what_problem1_established": "Scaled dot-product attention can compute normalized weights over sequence positions and aggregate value representations.",
+    "what_problem2_requires": "Warehouse demand forecasting requires using historical temporal observations to predict the next observation.",
+    "how_problem1_is_used": "The warehouse model converts each historical demand observation into a representation and applies the same Q/K/V, scaled similarity, softmax weighting, and weighted aggregation mechanism.",
+    "what_attention_behavior_can_show": "Attention statistics can show whether the trained model places different average weights on different historical positions.",
+    "causal_warning": "A high attention weight does not establish that a historical observation caused the future demand. It only describes an internal weighting used by this model.",
+    "whether_assumption_is_supported": "The connection is supported structurally if the warehouse model uses the same mathematical attention mechanism and the model learns predictive performance on the warehouse sequence task. Attention-position statistics provide additional diagnostic evidence."
+  }
+}

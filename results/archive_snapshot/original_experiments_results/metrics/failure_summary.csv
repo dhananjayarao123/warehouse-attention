@@ -1,0 +1,2 @@
+test_index,expected_demand,predicted_demand,absolute_error,max_historical_demand,attention_row_mean
+1098,314.4628601074219,171.33798217773438,143.1248779296875,224.012451171875,0.0416666679084301

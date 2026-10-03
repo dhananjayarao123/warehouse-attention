@@ -1,0 +1,78 @@
+SECTION 21 — CROSS-PROBLEM INTEGRATION
+======================================
+
+PROBLEM 1
+---------
+Problem 1 establishes scaled dot-product self-attention:
+
+    Q = X W_Q
+    K = X W_K
+    V = X W_V
+
+    S = Q K^T / sqrt(d_k)
+
+    A = softmax(S)
+
+    Y = A V
+
+
+PROBLEM 2
+---------
+Problem 2 uses previous 24 hourly warehouse observations:
+
+    y_(t-23), ..., y_(t-1)
+
+These observations are converted into input representations and passed
+through the same attention mechanism before the prediction head produces:
+
+    y_hat_t
+
+
+DIRECT CONNECTION
+-----------------
+Problem 1:
+    Attention learns weighted relationships among sequence positions.
+
+Problem 2:
+    Warehouse demand contains temporal dependencies among historical
+    observations.
+
+Application:
+    The warehouse model uses attention to assign different weights to
+    historical demand representations before constructing the context
+    used for next-hour prediction.
+
+
+EMPIRICAL RESULT
+----------------
+MAE  = 20.823511
+MSE  = 831.632324
+RMSE = 28.838036
+
+
+ATTENTION ANALYSIS
+------------------
+{
+  "available": false,
+  "shape": [
+    408,
+    24,
+    1,
+    1
+  ]
+}
+
+
+INTERPRETATION
+--------------
+The warehouse model converts each historical demand observation into a representation and applies the same Q/K/V, scaled similarity, softmax weighting, and weighted aggregation mechanism.
+
+The attention weights are diagnostic model quantities. They should not be
+interpreted as causal explanations.
+
+
+CONCLUSION
+----------
+Problem 2 is mathematically connected to Problem 1 because it reuses the
+same scaled dot-product attention mechanism rather than introducing an
+unrelated off-the-shelf Transformer or attention implementation.

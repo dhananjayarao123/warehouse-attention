@@ -1,0 +1,32 @@
+{
+  "problem_1": "Scaled dot-product self-attention learns weighted relationships among sequence positions.",
+  "problem_2": "Warehouse forecasting uses the previous 24 hourly observations to predict the next hour.",
+  "shared_mechanism": [
+    "Q=XW_Q",
+    "K=XW_K",
+    "V=XW_V",
+    "QK^T/sqrt(d_k)",
+    "stable softmax",
+    "AV"
+  ],
+  "dataset_source": "src.data_generator.generate_warehouse_data",
+  "demonstration": {
+    "input_shape": [
+      1,
+      24,
+      1
+    ],
+    "attention_shape": [
+      1,
+      24,
+      24
+    ],
+    "context_shape": [
+      1,
+      24,
+      4
+    ],
+    "attention_rows_sum_to_one": true
+  },
+  "interpretation_caution": "Attention weights are diagnostic weighting signals, not causal explanations."
+}

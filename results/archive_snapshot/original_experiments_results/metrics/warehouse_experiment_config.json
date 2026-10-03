@@ -1,0 +1,22 @@
+{
+    "problem": "Warehouse Demand Prediction",
+    "input": "Previous 24 hourly observations",
+    "output": "Next-hour demand",
+    "sequence_length": 24,
+    "attention": "First-principles scaled dot-product self-attention",
+    "d_model": 32,
+    "hidden_dim": 16,
+    "epochs": 10,
+    "batch_size": 128,
+    "learning_rate": 0.001,
+    "seed": 42,
+    "baselines": [
+        "Last Value",
+        "Moving Average"
+    ],
+    "metrics": [
+        "MAE",
+        "MSE",
+        "RMSE"
+    ]
+}

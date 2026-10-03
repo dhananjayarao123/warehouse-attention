@@ -1,0 +1,9 @@
+{
+  "rows": 720,
+  "seed": 42,
+  "mean_demand": 104.91492628031135,
+  "std_demand": 27.21692743224937,
+  "min_demand": 43.124634439016916,
+  "max_demand": 237.4452277733512,
+  "deterministic_check": true
+}

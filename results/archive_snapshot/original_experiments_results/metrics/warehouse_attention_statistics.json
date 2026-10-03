@@ -1,0 +1,6 @@
+{
+    "mean_attention_entropy": 3.1657919883728027,
+    "maximum_attention": 0.09835510700941086,
+    "mean_max_attention_per_query": 0.052686095237731934,
+    "fraction_above_0.95": 0.0
+}
